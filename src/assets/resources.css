@@ -1,0 +1,186 @@
+/* Text */
+.color-text {
+    color: var(--color-text);
+}
+
+.bg-color {
+    background-color: var(--color-bg-primary);
+}
+
+.glass-bg {
+    background-color: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+}
+
+@keyframes shimmer {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+/* Glass Card */
+.glass-card {
+    background-color: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    margin: 15px;
+
+    box-shadow: var(--glass-shadow);
+
+    overflow: hidden;
+    color: var(--glass-text);
+    height: 100dvh;
+}
+
+.glass-card-hover {
+    transition: all 0.3s ease-in-out;
+}
+
+.glass-card-hover:hover {
+    background-color: var(--glass-bg);
+    filter: brightness(1.1);
+    transform: var(--scale-hover);
+}
+
+.btn-primary {
+    position: relative;
+    overflow: hidden;
+    padding: 15px 30px;
+    background-color: var(--btn-bg);
+    color: var(--btn-text);
+    font-weight: bold;
+    font-size: 1.2rem;
+    border: 2px solid var(--btn-border);
+    border-radius: 24px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--btn-after-bg);
+    transform: scale(0);
+    transition: transform 0.3s ease-out;
+    pointer-events: none;
+}
+
+.btn-primary:hover {
+    filter: brightness(1.2);
+}
+
+.btn-primary:hover::after {
+    transform: scale(3);
+}
+
+.btn-primary:active {
+    transform: var(--scale-active);
+}
+
+/* Card */
+.card-side-menu {
+    width: 200px;
+    background-color: var(--menu-bg);
+    background-image: linear-gradient(139deg,
+            var(--menu-gradient-start) 0%,
+            var(--menu-gradient-end) 100%);
+    border-radius: 10px;
+    padding: 15px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.card-side-menu-content {
+    color: var(--menu-text);
+    padding: 15px;
+}
+
+.card-side-menu-separator {
+    border-top: 1.5px solid var(--menu-separator);
+}
+
+.card-side-menu-list {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 0px 10px;
+}
+
+.card-side-menu-element {
+    display: flex;
+    align-items: center;
+    color: var(--menu-text);
+    gap: 10px;
+    transition: all 0.3s ease-out;
+    padding: 4px 7px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.card-side-menu-element svg {
+    width: 19px;
+    height: 19px;
+    transition: all 0.3s ease-out;
+    stroke: var(--menu-text);
+}
+
+.card-side-menu-label {
+    font-weight: 600;
+}
+
+.card-side-menu-element:hover {
+    background-color: var(--menu-hover-bg);
+    color: var(--menu-hover-text);
+    transform: var(--translate-hover);
+}
+
+.card-side-menu-element:hover svg {
+    stroke: var(--menu-hover-text);
+}
+
+.card-side-menu-element.delete:hover {
+    background-color: var(--menu-delete-hover);
+}
+
+.card-side-menu-element:active {
+    transform: var(--scale-active);
+}
+
+.menu-item-container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+
+.menu-item {
+    padding: 8px;
+    border-radius: 16px;
+    color: var(--color-text);
+    cursor: pointer;
+    width: 100%;
+    background-color: transparent;
+    transition: all 0.3s ease-in-out;
+}
+
+.menu-item:hover {
+    background-color: var(--menu-hover-bg);
+    color: var(--menu-hover-text);
+    transform: var(--translate-hover);
+}
+
+.menu-item:active {
+    transform: var(--scale-active);
+}
