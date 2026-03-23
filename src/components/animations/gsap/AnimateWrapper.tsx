@@ -9,7 +9,7 @@ import { EASE_PREMIUM } from "../../../core/utils/animations";
  */
 interface AnimateWrapperProps {
   children: ReactNode;
-  animation?: "fadeIn" | "slideUp" | "slideDown" | "pop";
+  animation?: "fadeIn" | "slideUp" | "slideDown" | "pop" | "none";
   delay?: number;
   duration?: number;
   className?: string;
@@ -18,7 +18,7 @@ interface AnimateWrapperProps {
 
 export const AnimateWrapper = ({
   children,
-  animation = "slideUp",
+  animation = "none",
   delay = 0,
   duration = 0.6,
   className = "",
@@ -39,6 +39,7 @@ export const AnimateWrapper = ({
         stagger,
       };
 
+      if (animation === "none") return;
       if (animation === "slideUp") vars.y = 30;
       if (animation === "slideDown") vars.y = -30;
       if (animation === "pop") vars.scale = 0.9;

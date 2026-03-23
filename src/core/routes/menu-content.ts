@@ -7,10 +7,8 @@ import {
   ShoppingBagIcon,
   ShoppingCartIcon,
   UsersIcon,
-  TruckIcon,
   ChartBarIcon,
   CogIcon,
-  PlusIcon,
 } from "@heroicons/react/24/outline";
 
 export const MENU_CONTENT = {
@@ -26,68 +24,55 @@ export const MENU_ROUTES = {
 };
 export const CHILDREN_SUPER_ADMIN: MenuItem[] = [
   {
-    title: "Home",
+    title: "Inicio",
     href: "/home",
     icon: HomeIcon,
   },
   {
-    title: "Users",
+    title: "Usuarios",
     href: "/users",
     icon: UserIcon,
   },
   {
-    title: "Products",
+    title: "Productos",
     href: "/products",
     icon: ShoppingBagIcon,
   },
   {
-    title: "Categories",
+    title: "Categorias",
     href: "/categories",
     icon: TagIcon,
   },
   {
-    title: "Orders",
+    title: "Pedidos",
     href: "/orders",
     icon: ShoppingCartIcon,
   },
   {
-    title: "Customers",
+    title: "Clientes",
     href: "/customers",
     icon: UsersIcon,
   },
   {
-    title: "Suppliers",
-    href: "/suppliers",
-    icon: TruckIcon,
-  },
-  {
-    title: "Reports",
+    title: "Reportes",
     href: "/reports",
     icon: ChartBarIcon,
   },
   {
-    title: "Settings",
+    title: "Configuración",
     href: "/settings",
     icon: CogIcon,
   },
 ];
 
-export const CHILDREN_SUPER_ADMIN_OPTIONS: MenuItem[] = [
-  {
-    title: "Add Product",
-    href: "/products/add",
-    icon: PlusIcon,
-  },
-];
-
 export const CHILDREN_ADMIN: MenuItem[] = [
   {
-    title: "Dashboard",
+    title: "Inicio",
     href: "/dashboard",
     icon: HomeIcon,
   },
   {
-    title: "Users",
+    title: "Usuarios",
     href: "/users",
     icon: UserIcon,
   },
@@ -95,12 +80,12 @@ export const CHILDREN_ADMIN: MenuItem[] = [
 
 export const CHILDREN_EMPLOYEE: MenuItem[] = [
   {
-    title: "Dashboard",
+    title: "Inicio",
     href: "/dashboard",
     icon: HomeIcon,
   },
   {
-    title: "Users",
+    title: "Usuarios",
     href: "/users",
     icon: UserIcon,
   },
@@ -109,10 +94,6 @@ export const CHILDREN_EMPLOYEE: MenuItem[] = [
 export const superAdminMenu: MenuGroup[] = [
   {
     items: CHILDREN_SUPER_ADMIN,
-  },
-  {
-    title: "Opciones",
-    items: CHILDREN_SUPER_ADMIN_OPTIONS,
   },
 ];
 

@@ -5,6 +5,7 @@ interface SkeletonProps {
   variant?: "rect" | "circle" | "text";
   width?: string | number;
   height?: string | number;
+  children?: ReactNode;
 }
 
 /**
@@ -16,6 +17,7 @@ export const Skeleton = ({
   variant = "rect",
   width,
   height,
+  children,
 }: SkeletonProps): ReactNode => {
   const baseStyles =
     "relative overflow-hidden bg-white/5 dark:bg-white/5 animate-pulse";
@@ -38,6 +40,7 @@ export const Skeleton = ({
     >
       {/* Shimmering Glare Effect */}
       <div className="absolute inset-0 -translate-x-full animate-[shimmer_2s_infinite] bg-gradient-to-r from-transparent via-white/5 to-transparent shadow-[0_0_40px_rgba(255,255,255,0.05)]" />
+      {children}
     </div>
   );
 };

@@ -99,11 +99,11 @@ export const Login = (): ReactNode => {
     try {
       await login(data);
       if (isSuperAdmin) {
-        navigate(APP_ROUTES.SUPER_ADMIN);
+        navigate(APP_ROUTES.HOME);
       } else if (isAdmin) {
-        navigate(APP_ROUTES.ADMIN);
+        navigate(APP_ROUTES.HOME);
       } else {
-        navigate(APP_ROUTES.EMPLOYEE);
+        navigate(APP_ROUTES.HOME);
       }
       setIsLoading(false);
     } catch (err) {

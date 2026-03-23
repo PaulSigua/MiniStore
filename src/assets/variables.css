@@ -6,7 +6,7 @@
     /* Semantic Variables - Light Theme */
     --color-bg-primary: #E8E8E8;
     --color-text-primary: #1d1d1f;
-    --color-accent-black: rgb(25, 43, 63);
+    --color-accent-black: #000;
     --color-accent-blue: #007aff;
     --color-accent-orange: #ff8c3b;
     --color-accent-orange-hover: #D4440C;
@@ -16,9 +16,10 @@
     --menu-gradient-start: rgb(255, 255, 255, 0);
     --menu-gradient-end: rgba(255, 255, 255, 1);
     --menu-text: #48484a;
-    --menu-separator: #d1d1d6;
-    --menu-hover-bg: var(--color-accent-black);
-    --menu-hover-text: #ffffff;
+    --menu-active-bg: #000000;
+    --menu-active-text: #ffffff;
+    --menu-hover-bg: rgba(0, 0, 0, 0.05);
+    --menu-hover-text: var(--color-text);
     --menu-delete-hover: #8e2a2a;
 
     /* Button - Light */
@@ -61,8 +62,10 @@
     --menu-gradient-end: rgba(37, 28, 40, 1);
     --menu-text: #7e8590;
     --menu-separator: #42434a;
-    --menu-hover-bg: var(--color-accent-black);
-    --menu-hover-text: hsl(0, 0%, 100%);
+    --menu-active-bg: var(--color-accent-orange);
+    --menu-active-text: #ffffff;
+    --menu-hover-bg: rgba(255, 255, 255, 0.1);
+    --menu-hover-text: #ffffff;
     --menu-delete-hover: #8e2a2a;
 
     /* Button - Dark */
@@ -87,8 +90,10 @@
     --color-content: var(--color-text-primary);
 
     /* Exposing semantic variables to Tailwind */
-    --color-menu-bg: var(--menu-bg);
-    --color-menu-text: var(--menu-text);
+    --color-menu-active-bg: var(--menu-active-bg);
+    --color-menu-active-text: var(--menu-active-text);
+    --color-menu-hover-bg: var(--menu-hover-bg);
+    --color-menu-hover-text: var(--menu-hover-text);
     --color-glass-bg: var(--glass-bg);
     --color-glass-border: var(--glass-border);
 }

@@ -12,6 +12,8 @@ export interface SideMenuProps {
     user: User;
     logout: () => void;
   };
+  activeModal?: string | null;
+  onShowUserDetails?: (e: React.MouseEvent) => void;
   groups: MenuGroup[];
 }
 
@@ -19,6 +21,7 @@ export interface MenuItem {
   title: string;
   href: string;
   icon: ElementType;
+  onClick?: (e: React.MouseEvent) => void;
   children?: MenuItem[];
 }
 
