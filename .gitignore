@@ -34,4 +34,4 @@ database.sqlite
 
 # Vite
 .vite
-.vite/*
+.vite/*.env
