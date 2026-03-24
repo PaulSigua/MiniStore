@@ -87,35 +87,37 @@ export const SideMenu = ({
   content,
 }: SideMenuProps) => {
   return (
-    <div className="glass-card flex flex-col h-full w-64 p-4 pb-6 gap-4 overflow-hidden">
-      <Logo />
-      <nav className="min-h-0 overflow-y-auto pr-2 -mr-2 custom-scrollbar">
-        <div className="flex flex-col gap-8 mt-4">
-          {groups.map((group, groupIndex) => (
-            <div key={groupIndex} className="space-y-3">
-              {group.title && (
-                <h3 className="px-4 text-[11px] font-bold uppercase tracking-[0.2em] color-text opacity-50">
-                  {group.title}
-                </h3>
-              )}
-              <ul className="space-y-1">
-                {group.items.map((item) => (
-                  <SideMenuItem
-                    key={item.title}
-                    item={item}
-                    activeModal={activeModal}
-                  />
-                ))}
-              </ul>
-
-              {groupIndex < groups.length - 1 &&
-                !groups[groupIndex + 1].title && (
-                  <div className="h-[1px] bg-black/5 mx-4 mt-6 opacity-10" />
+    <div className="glass-card flex flex-col h-full w-64 p-4 pb-6 gap-4 overflow-hidden justify-between">
+      <div className="flex flex-col gap-4">
+        <Logo />
+        <nav className="min-h-0 overflow-y-auto pr-2 -mr-2 custom-scrollbar">
+          <div className="flex flex-col gap-8 mt-4">
+            {groups.map((group, groupIndex) => (
+              <div key={groupIndex} className="space-y-3">
+                {group.title && (
+                  <h3 className="px-4 text-[11px] font-bold uppercase tracking-[0.2em] color-text opacity-50">
+                    {group.title}
+                  </h3>
                 )}
-            </div>
-          ))}
-        </div>
-      </nav>
+                <ul className="space-y-1">
+                  {group.items.map((item) => (
+                    <SideMenuItem
+                      key={item.title}
+                      item={item}
+                      activeModal={activeModal}
+                    />
+                  ))}
+                </ul>
+
+                {groupIndex < groups.length - 1 &&
+                  !groups[groupIndex + 1].title && (
+                    <div className="h-[1px] bg-black/5 mx-4 mt-6 opacity-10" />
+                  )}
+              </div>
+            ))}
+          </div>
+        </nav>
+      </div>
       <div className="pt-2 border-t border-white/5">
         <UserItem content={content} onShowUserDetails={onShowUserDetails} />
       </div>

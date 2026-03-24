@@ -19,7 +19,7 @@ export const UserItem = ({
   return (
     <div className="relative">
       {isOpen && (
-        <div className="absolute top-12 left-0 mb-2 w-fit glass-card ml-0 z-50 p-2 h-fit">
+        <div className="absolute left-0 bottom-full mb-2 w-fit glass-card ml-0 z-50 p-2 h-fit">
           <button
             onClick={(e) => {
               onShowUserDetails?.(e);
