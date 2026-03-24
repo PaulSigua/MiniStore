@@ -33,8 +33,8 @@ export const ModalController = ({
     case "user-details":
       return user ? (
         <div className="space-y-4">
-          <div className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/10">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-vibrant-orange to-red-600 flex items-center justify-center text-white text-3xl font-black">
+          <div className="flex items-center gap-4 rounded-2xl bg-white/5 border border-white/10">
+            <div className="w-12 h-12 rounded-2xl bg-gradient-to-br from-vibrant-orange to-red-600 flex items-center justify-center text-center text-white text-3xl font-black">
               {user.name.charAt(0)}
             </div>
             <div>
@@ -42,7 +42,7 @@ export const ModalController = ({
               <p className="text-sm opacity-60 color-text">{user.email}</p>
             </div>
           </div>
-          <div className="p-4 rounded-2xl bg-white/5 border border-white/10">
+          <div className="p-2 rounded-2xl bg-white/5 border border-white/10">
             <p className="text-sm color-text">
               <strong>Rol:</strong> {user.role}
             </p>

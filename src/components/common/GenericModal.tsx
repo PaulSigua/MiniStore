@@ -113,6 +113,7 @@ export const GenericModal = ({
 
   return (
     <div
+      data-modal="true"
       className={`fixed inset-0 z-50 flex ${
         !displayAnchorRect ? "items-center justify-center p-4" : ""
       } ${isClosing ? "animate-ios-overlay-out" : "animate-ios-overlay"}`}
