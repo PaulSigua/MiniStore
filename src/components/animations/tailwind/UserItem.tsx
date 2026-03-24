@@ -1,8 +1,8 @@
+import { useRef, useEffect, useState } from "react";
 import {
   ArrowRightOnRectangleIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
-import { useState } from "react";
 import type { SideMenuProps } from "../../../core/types/menu";
 
 export const UserItem = ({
@@ -13,11 +13,35 @@ export const UserItem = ({
   onShowUserDetails?: (e: React.MouseEvent) => void;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+
+      // Don't close if clicking inside the menu OR inside a modal
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(target) &&
+        !target.closest('[data-modal="true"]')
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
 
   if (!content) return null;
 
   return (
-    <div className="relative">
+    <div className="relative" ref={menuRef}>
       {isOpen && (
         <div className="absolute left-0 bottom-full mb-2 w-fit glass-card ml-0 z-50 p-2 h-fit">
           <button
