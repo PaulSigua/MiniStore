@@ -72,7 +72,7 @@ export const Screen = () => {
   if (!user) return <div>{t.common.loading}</div>;
 
   return (
-    <div className="flex h-screen overflow-hidden color-text glass-bg p-4">
+    <div className="flex h-screen overflow-hidden color-text glass-bg p-4 gap-4">
       {/* Lateral Menu */}
       <SideMenu
         groups={getMenuGroups()}
