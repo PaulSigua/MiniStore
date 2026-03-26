@@ -1,10 +1,10 @@
-import { Button } from "../../components/animations/tailwind/Button";
+import { CreateUser } from "../../components/forms/create-user/CreateUser";
 
-export const AddCustomer = ({ onSuccess, content }: { onSuccess: () => void, content: React.ReactNode }) => {
+export const AddCustomer = ({ content, onSuccess }: { content: React.ReactNode, onSuccess: () => void }) => {
     return (
         <div className="flex flex-col gap-4">
             {content}
-            <Button onClick={onSuccess} text="Listo" />
+            <CreateUser onSuccess={onSuccess} />
         </div>
     );
 };

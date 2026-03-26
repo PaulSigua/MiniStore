@@ -24,6 +24,7 @@
     "react": "^19.2.0",
     "react-doctor": "^0.0.29",
     "react-dom": "^19.2.0",
+    "react-hook-form": "^7.72.0",
     "react-router-dom": "^6.30.3",
     "sileo": "^0.1.5"
   },
@@ -37,6 +38,7 @@
     "autoprefixer": "^10.4.27",
     "babel-plugin-react-compiler": "^1.0.0",
     "eslint": "^9.39.1",
+    "eslint-plugin-erasable-syntax-only": "^0.4.0",
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",

@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, Navigate } from "react-router-dom";
 import { useUser } from "../core/hooks/user.hook";
-import { useTranslation } from "../core/hooks/useTranslation";
 import { SideMenu } from "../components/animations/tailwind/SideMenu";
 import { GenericModal } from "../components/common/GenericModal";
 import {
@@ -9,14 +8,13 @@ import {
   adminMenu,
   employeeMenu,
 } from "../core/routes/menu-content";
-import Skeleton from "../components/animations/tailwind/Skeleton";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { ModalController } from "../components/modals/ModalController";
 import { getModalTitle } from "../core/utils/modal.utils";
+import { APP_ROUTES } from "../core/services/app-routes";
 
 export const Screen = () => {
   const { user, isAdmin, isSuperAdmin } = useUser();
-  const { t } = useTranslation();
 
   // State for modal
   type ModalType = "add-product" | "add-customer" | "user-details" | null;
@@ -69,7 +67,9 @@ export const Screen = () => {
     return baseMenu;
   };
 
-  if (!user) return <div>{t.common.loading}</div>;
+  if (!user) {
+    return <Navigate to={APP_ROUTES.LOGIN} replace />;
+  }
 
   return (
     <div className="flex h-screen overflow-hidden color-text glass-bg p-4 gap-4">
@@ -78,14 +78,12 @@ export const Screen = () => {
         groups={getMenuGroups()}
         activeModal={activeModal}
         onShowUserDetails={handleShowUserDetails}
-        content={{ title: user.name, user: user, logout: () => {} }}
+        content={{ title: user.username, user: user, logout: () => {} }}
       />
 
       {/* Main Content */}
       <main className="flex-1 glass-card overflow-y-auto relative shadow-lg p-8">
-        <Skeleton className="w-full h-full" variant="text">
-          <Outlet />
-        </Skeleton>
+        <Outlet />
       </main>
 
       {/* Modal */}

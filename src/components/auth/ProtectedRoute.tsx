@@ -1,23 +1,38 @@
 import { Navigate, useLocation } from "react-router-dom";
 import { useUser } from "../../core/hooks/user.hook";
-import type { ProtectedRouteProps } from "../../core/utils/user.auth";
+import {
+  type ProtectedRouteProps,
+  isTokenExpired,
+} from "../../core/utils/user.auth";
 import { APP_ROUTES } from "../../core/services/app-routes";
+import { useEffect } from "react";
 
-export const ProtectedRoute = ({ children, allowedRoles }: ProtectedRouteProps) => {
-    const { user, loading } = useUser();
-    const location = useLocation();
+export const ProtectedRoute = ({
+  children,
+  allowedRoles,
+}: ProtectedRouteProps) => {
+  const { user, loading, logout } = useUser();
+  const location = useLocation();
 
-    if (loading) {
-        return <div>Loading...</div>;
+  useEffect(() => {
+    if (user && isTokenExpired(user.token)) {
+      logout();
     }
+  }, [user, logout]);
 
-    if (!user) {
-        return <Navigate to={APP_ROUTES.LOGIN} state={{ from: location }} replace />;
-    }
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
-    if (!allowedRoles.includes(user.role)) {
-        return <Navigate to={APP_ROUTES.HOME} state={{ from: location }} replace />;
-    }
+  if (!user || isTokenExpired(user.token)) {
+    return (
+      <Navigate to={APP_ROUTES.LOGIN} state={{ from: location }} replace />
+    );
+  }
 
-    return <>{children}</>;
-}
+  if (!allowedRoles.includes(user.role)) {
+    return <Navigate to={APP_ROUTES.HOME} state={{ from: location }} replace />;
+  }
+
+  return <>{children}</>;
+};

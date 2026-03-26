@@ -1,0 +1,11 @@
+.form-container {
+    @apply glass-card p-4;
+}
+
+.form-container input {
+    @apply glass-input;
+}
+
+.form-container input:focus {
+    @apply glass-input:focus;
+}

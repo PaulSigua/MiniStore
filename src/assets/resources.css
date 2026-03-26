@@ -44,6 +44,23 @@
     transform: var(--scale-hover);
 }
 
+.glass-input {
+    background-color: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    padding: 15px;
+    color: var(--glass-text);
+    outline: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.glass-input:focus {
+    border-color: var(--vibrant-orange);
+    box-shadow: 0 0 0 3px rgba(255, 140, 60, 0.2);
+}
+
 .btn-primary {
     position: relative;
     overflow: hidden;
@@ -174,4 +191,18 @@
 
 .menu-item:active {
     transform: var(--scale-active);
+}
+
+@keyframes spin-slow {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.animate-spin-slow {
+    animation: spin-slow 3s linear infinite;
 }

@@ -31,10 +31,12 @@
 
     /* Glassmorphism Light */
     --glass-bg: rgba(255, 255, 255, 0.768);
+    --glass-bg-hover: rgb(230, 230, 230);
     --glass-border: rgba(255, 255, 255, 0.5);
     --glass-text: #1d1d1f;
     --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.08);
     --glass-blur: blur(16px) saturate(150%);
+    --glass-border-dark: rgb(235, 235, 235);
 
     /* Global Animations */
     --scale-hover: scale(1.02);
@@ -47,6 +49,17 @@
     --duration-fast: 200ms;
     --duration-normal: 400ms;
     --duration-slow: 700ms;
+
+    /* Table */
+    --table-bg: var(--glass-bg);
+    --table-border: var(--glass-border-dark);
+    --table-text: var(--glass-text);
+    --table-header-bg: var(--glass-bg);
+    --table-header-text: var(--glass-text);
+    --table-row-hover-bg: var(--glass-bg-hover);
+    --table-row-hover-text: var(--glass-text);
+    --table-row-active-bg: var(--glass-bg);
+    --table-row-active-text: var(--glass-text);
 }
 
 .dark {

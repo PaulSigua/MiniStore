@@ -1,9 +1,10 @@
-import { useState, type ReactNode } from "react";
+import { useState, useEffect, type ReactNode } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card } from "../../components/animations/tailwind/Card";
 import type { UserLogin } from "../../core/types/auth";
 import { useUser } from "../../core/hooks/user.hook";
 import { APP_ROUTES } from "../../core/services/app-routes";
+import { LoadingSpinner } from "../../components/animations/tailwind/LoadingSpinner";
 
 interface LoginFormProps {
   onSubmit: (data: UserLogin) => Promise<void>;
@@ -72,11 +73,11 @@ const LoginForm = ({ onSubmit, isLoading }: LoginFormProps): ReactNode => {
           isLoading ? "opacity-50 cursor-not-allowed" : ""
         }`}
       >
-        <span className="relative z-10 flex items-center justify-center gap-2">
+        <span className="relative z-10 flex items-center justify-center gap-3">
           {isLoading ? (
             <>
-              <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-              Cargando...
+              <LoadingSpinner size="sm" />
+              Ingresando...
             </>
           ) : (
             "Iniciar Sesión"
@@ -88,24 +89,24 @@ const LoginForm = ({ onSubmit, isLoading }: LoginFormProps): ReactNode => {
 };
 
 export const Login = (): ReactNode => {
-  const { login, isAdmin, isSuperAdmin } = useUser();
+  const { login, user } = useUser();
   const navigate = useNavigate();
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  // Redirect if the user is already authenticated
+  useEffect(() => {
+    if (user) {
+      navigate(APP_ROUTES.HOME, { replace: true });
+    }
+  }, [user, navigate]);
 
   const handleSubmit = async (data: UserLogin) => {
     setIsLoading(true);
     setError(null);
     try {
       await login(data);
-      if (isSuperAdmin) {
-        navigate(APP_ROUTES.HOME);
-      } else if (isAdmin) {
-        navigate(APP_ROUTES.HOME);
-      } else {
-        navigate(APP_ROUTES.HOME);
-      }
-      setIsLoading(false);
+      // Navigation will happen automatically through the useEffect when the 'user' changes
     } catch (err) {
       const errorMessage =
         err instanceof Error
@@ -143,7 +144,7 @@ export const Login = (): ReactNode => {
         </div>
       </div>
 
-      {/* Columna Derecha: Contenedor Auth */}
+      {/* Right Column: Auth Container */}
       <div className="flex-1 flex items-center justify-center p-6 bg-slate-900/40 backdrop-blur-3xl relative border-l border-white/5">
         <div className="w-full max-w-md relative">
           {/* Logo Mobile */}
@@ -153,7 +154,7 @@ export const Login = (): ReactNode => {
             </h1>
           </div>
 
-          {/* Formulario envuelto en la Card del sistema */}
+          {/* Form wrapped in the system Card */}
           <Card
             className="p-10 border-white/10"
             content={

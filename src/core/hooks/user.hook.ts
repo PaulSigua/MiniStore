@@ -1,7 +1,7 @@
 // hooks/useUser.ts
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
-import { checkRole } from "../services/user.sevice";
+import { checkRole } from "../services/user/user.service";
 
 export const useUser = () => {
   const context = useContext(UserContext);

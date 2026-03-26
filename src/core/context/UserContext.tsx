@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState, type ReactNode } from "react";
-import type { User } from "../utils/user.auth";
+import { type User, isTokenExpired } from "../utils/user.auth";
 import type { UserLogin } from "../types/auth";
 import { authService } from "../services/auth/auth.service";
 
@@ -14,6 +14,7 @@ interface UserContextType {
 declare global {
   interface Window {
     setUser: (user: import("../utils/user.auth").User | null) => void;
+    logout: () => void;
   }
 }
 
@@ -26,38 +27,64 @@ export function UserProvider({ children }: { children: ReactNode }) {
   // #region inicialize user with localstorage ...
   const [user, setUser] = useState<User | null>(() => {
     const savedUser = localStorage.getItem("user");
-    return savedUser ? JSON.parse(savedUser) : null;
+    if (savedUser) {
+      const parsedUser: User = JSON.parse(savedUser);
+      if (isTokenExpired(parsedUser.token)) {
+        localStorage.removeItem("user");
+        localStorage.removeItem("token");
+        return null;
+      }
+      return parsedUser;
+    }
+    return null;
   });
 
   const [loading] = useState(false);
   // #endregion
 
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+  };
+
   useEffect(() => {
     if (import.meta.env.DEV) {
       window.setUser = setUser;
-      console.log("🛠️ Debug: window.setUser disponible");
+      window.logout = logout;
+      console.log("🛠️ Debug: window.setUser y window.logout disponibles");
     }
-  }, [setUser]);
+
+    // Verify token expiration every minute
+    const interval = setInterval(() => {
+      if (user && isTokenExpired(user.token)) {
+        console.warn("Token expired detected in periodic verification");
+        logout();
+      }
+    }, 60000);
+
+    return () => clearInterval(interval);
+  }, [user, setUser]);
 
   const login = async (data: UserLogin) => {
     const response = await authService.login(data);
 
-    // El API devuelve 'access_token' en lugar de un objeto 'user'
+    // The API returns 'access_token' instead of a 'user' object
     if (response.access_token) {
       const token = response.access_token;
 
-      // Decodificamos el payload del JWT (segunda parte del token separada por puntos)
+      // Decode the JWT payload (second part of the token separated by dots)
       try {
         const payloadBase64 = token.split(".")[1];
         const payloadJson = atob(payloadBase64);
         const decoded = JSON.parse(payloadJson);
 
-        // Mapeamos los campos del JWT a nuestra interfaz User
+        // Map JWT fields to our User interface
         const userData: User = {
           id: decoded.sub || decoded.id,
-          name: decoded.username || decoded.name,
+          username: decoded.username || decoded.name,
           email: decoded.email,
-          // Normalizamos roles si es necesario (ej: de 'superadmin' a 'super-admin')
+          // Normalize roles if necessary (e.g., from 'superadmin' to 'super-admin')
           role: decoded.role === "superadmin" ? "super-admin" : decoded.role,
           token: token,
           avatar: decoded.avatar,
@@ -73,12 +100,6 @@ export function UserProvider({ children }: { children: ReactNode }) {
     } else {
       throw new Error(response.message || "Credenciales inválidas");
     }
-  };
-
-  const logout = () => {
-    setUser(null);
-    localStorage.removeItem("user");
-    localStorage.removeItem("token");
   };
 
   return (
