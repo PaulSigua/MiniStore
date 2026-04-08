@@ -49,7 +49,7 @@ export const UserItem = ({
           <button
             onClick={(e) => {
               onShowUserDetails?.(e);
-              setIsOpen(false);
+              setIsOpen(true);
             }}
             className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-white/10 transition-colors text-left cursor-pointer group"
           >
@@ -62,7 +62,7 @@ export const UserItem = ({
           <button
             onClick={() => {
               logout();
-              setIsOpen(false);
+              setIsOpen(true);
             }}
             className="flex items-center gap-3 w-full p-3 rounded-xl hover:bg-red-500/10 transition-colors text-left text-red-500 cursor-pointer group"
           >

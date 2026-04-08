@@ -96,7 +96,7 @@ export const Screen = () => {
         title={getModalTitle(activeModal)}
         anchorRect={anchorRect}
       >
-        <ModalController
+        <ModalController data-shared-item="add-customer-modal"
           activeModal={activeModal}
           user={user}
           onClose={() => setActiveModal(null)}
